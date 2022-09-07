@@ -9,6 +9,8 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import controllers.GeneralTableController;
 import models.GeneralTableModel;
+import renderers.HeaderCellRenderer;
+import renderers.TableCellRenderer;
 
 public class GeneralTableView {
 
@@ -36,7 +38,8 @@ public class GeneralTableView {
 
 		table.setPreferredScrollableViewportSize(new Dimension(200, 250));
 		table.setFillsViewportHeight(true);
-
+		table.setDefaultRenderer(Object.class, new TableCellRenderer());
+		table.getTableHeader().setDefaultRenderer(new HeaderCellRenderer());
 		this.model = table.getSelectionModel();
 		
 		JScrollPane scrlTable = new JScrollPane(table);
