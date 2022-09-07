@@ -14,13 +14,13 @@ public class MenuView extends JMenuBar {
 	JMenuBar mnubAppMenu;
 	public JFrame frame;
 	private JMenu mnuFile, mnuEdit, mnuHelp;
-	private JMenuItem mniSwitchXML, mniExit, mniFirst, mniNext, mniPrevious, mniLast, mniNew, mniEdit, mniDelete, mniAccpet,
-			mniCancel, mniReport, mniAbout;
+	private JMenuItem mniSwitchXML, mniExit, mniFirst, mniNext, mniPrevious, mniLast, mniNew, mniEdit, mniDelete,
+			mniAccpet, mniCancel, mniReport, mniAbout;
 
 	public MenuView(JFrame frame) {
-		
+
 		this.frame = frame;
-		
+
 		mnubAppMenu = new JMenuBar();
 		mnuFile = new JMenu("File");
 		mnuEdit = new JMenu("Edit");
@@ -56,7 +56,7 @@ public class MenuView extends JMenuBar {
 		mnuEdit.add(mniAccpet);
 		mnuEdit.add(mniCancel);
 		mnuEdit.add(mniReport);
-		
+
 		mnuHelp.add(mniAbout);
 
 		mniSwitchXML.setPreferredSize(new Dimension(150, 25));
@@ -66,11 +66,11 @@ public class MenuView extends JMenuBar {
 		mnubAppMenu.add(mnuFile);
 		mnubAppMenu.add(mnuEdit);
 		mnubAppMenu.add(mnuHelp);
-		
+
 		setActionCommands();
 		frame.setJMenuBar(mnubAppMenu);
 	}
-	
+
 	private void setActionCommands() {
 		mniSwitchXML.setActionCommand("switch XML");
 		mniExit.setActionCommand("exit");
@@ -86,7 +86,7 @@ public class MenuView extends JMenuBar {
 		mniReport.setActionCommand("report");
 		mniAbout.setActionCommand("about");
 	}
-	
+
 	public void setActionListeners(MenuController menuController) {
 		mniSwitchXML.addActionListener(menuController);
 		mniExit.addActionListener(menuController);
@@ -102,5 +102,5 @@ public class MenuView extends JMenuBar {
 		mniReport.addActionListener(menuController);
 		mniAbout.addActionListener(menuController);
 	}
-	
+
 }

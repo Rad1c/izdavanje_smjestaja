@@ -54,6 +54,12 @@ public class RowModel {
 	}
 	
 	
+	public static int getCounter() {
+		return counter;
+	}
+	public static void setCounter(int counter) {
+		RowModel.counter = counter;
+	}
 	@Override
 	public String toString() {
 		String out = "" + this.rowId + " ";

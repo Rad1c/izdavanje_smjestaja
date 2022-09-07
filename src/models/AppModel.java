@@ -14,6 +14,8 @@ import user.User;
 public class AppModel {
 	User user;
 	ToolBarModel toolBarModel;
+	GeneralTableModel generalTableModel;
+
 	public User getUser() {
 		return user;
 	}
@@ -25,17 +27,17 @@ public class AppModel {
 	public AppModel(User user) {
 		this.user = user;
 	}
-	
+
 	public String getDateTime() {
 		LocalDateTime myDateObj = LocalDateTime.now();
-	    System.out.println("Before formatting: " + myDateObj);
-	    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+		System.out.println("Before formatting: " + myDateObj);
+		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
-	    String formattedDate = myDateObj.format(myFormatObj);
-		
+		String formattedDate = myDateObj.format(myFormatObj);
+
 		return formattedDate;
 	}
-	
+
 	public ArrayList<String> getTablesForTableBrowser() {
 		Connection db = DBConnection.getConnection();
 		ArrayList<String> tables = new ArrayList<String>();
@@ -44,16 +46,20 @@ public class AppModel {
 			procedureStatement.setString(1, this.user.getPosOznaka());
 			procedureStatement.setInt(2, this.user.getPosIdentifikator());
 			procedureStatement.setInt(3, this.user.getUserId());
-			
-			ResultSet rez = (ResultSet)procedureStatement.executeQuery();
 
-			while(rez.next()) {
+			ResultSet rez = (ResultSet) procedureStatement.executeQuery();
+
+			while (rez.next()) {
 				tables.add(rez.getString(1));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.toString());
 		}
 		return tables;
+	}
+
+	public void exitFromApp() {
+		System.exit(0);
 	}
 
 	public ToolBarModel getToolBarModel() {
@@ -63,4 +69,13 @@ public class AppModel {
 	public void setToolBarModel(ToolBarModel toolBarModel) {
 		this.toolBarModel = toolBarModel;
 	}
+
+	public GeneralTableModel getGeneralTableModel() {
+		return generalTableModel;
+	}
+
+	public void setGeneralTableModel(GeneralTableModel generalTableModel) {
+		this.generalTableModel = generalTableModel;
+	}
+
 }

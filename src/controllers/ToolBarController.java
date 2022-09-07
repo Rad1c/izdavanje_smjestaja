@@ -5,19 +5,27 @@ import java.awt.event.ActionListener;
 
 import models.AppModel;
 import models.ToolBarModel;
+import views.AppView;
 import views.ToolBarView;
 
 public class ToolBarController implements ActionListener {
 	AppModel appModel;
-	ToolBarView toolbar;
-	public ToolBarController(AppModel appModel, ToolBarView toolbar) {
+	AppView appView;
+	ToolBarView toolbarView;
+	ToolBarModel toolBarModel;
+
+	public ToolBarController(AppModel appModel, AppView appView) {
 		this.appModel = appModel;
-		this.toolbar = toolbar;
-		this.toolbar.addActionListeners(this);
+		this.appView = appView;
+		this.toolBarModel = new ToolBarModel();
+		this.appModel.setToolBarModel(this.toolBarModel);
+		this.toolbarView = new ToolBarView(appView.getPnlHeader());
+		this.toolbarView.addActionListeners(this);
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("pritisnuto " + e.getActionCommand());
-		
+		System.out.println("(class: ToolBarController) pritisnuto " + e.getActionCommand());
+
 	}
 }

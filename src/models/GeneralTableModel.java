@@ -17,7 +17,9 @@ public class GeneralTableModel {
 	ArrayList<String> columnsNames;
 	String[][] columnsData;
 	
+	
 	public GeneralTableModel(String tableName) {
+		RowModel.setCounter(0);
 		columns = XMLParser.getColumnsFromTableName(tableName);
 		Connection db = DBConnection.getConnection();
 		ConnectionInfo connInfo = XMLParser.getConnectionString();

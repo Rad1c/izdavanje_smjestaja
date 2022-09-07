@@ -6,19 +6,20 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import models.AppModel;
+import models.GeneralTableModel;
 import views.AppView;
 import views.TreeView;
 
 public class TreeController implements TreeSelectionListener{
 	AppModel appModel;
-	TreeView treeView;
 	AppView appView;
+	TreeView treeView;
 	
 	
-	public TreeController(AppView appView,AppModel appModel, TreeView treeView) {
+	public TreeController(AppModel appModel, AppView appView) {
 		this.appModel = appModel;
-		this.treeView = treeView;
 		this.appView = appView;
+		this.treeView = new TreeView(appModel, appView);
 	}
 	
 
@@ -31,7 +32,8 @@ public class TreeController implements TreeSelectionListener{
 			
 			System.out.println("xx");
 			if(selectedNode.isLeaf()) {
-				new GeneralTableController(selectedNodeName.toString(),this.appView);
+				appModel.setGeneralTableModel(new GeneralTableModel(selectedNodeName));
+				new GeneralTableController(appModel, appView);
 			}
 		}
 

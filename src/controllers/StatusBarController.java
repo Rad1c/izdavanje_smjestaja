@@ -1,14 +1,20 @@
 package controllers;
 
-import javax.swing.JFrame;
-
-import models.StatusBarModel;
+import models.AppModel;
+import views.AppView;
+import views.StatusBarView;
 
 public class StatusBarController {
+	AppModel appModel;
+	AppView appView;
+	StatusBarView statusBarView;
 
-	public StatusBarController(StatusBarModel statusBar,JFrame frame)
-	{
-		statusBar.createStatusBar(frame);
+	public StatusBarController(AppModel appModel, AppView appView) {
+		this.appModel = appModel;
+		this.appView = appView;
+		this.statusBarView = new StatusBarView();
+		this.statusBarView.setStatusBar(this.appView.getFrApp());
+		this.appView.setStatusBarView(this.statusBarView);
 	}
-	
+
 }
