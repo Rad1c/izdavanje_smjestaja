@@ -3,6 +3,8 @@ package main;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import controllers.LoginController;
+import models.LoginModel;
 import views.LoginView;
 
 public class Main {
@@ -15,6 +17,6 @@ public class Main {
 		} catch (InstantiationException e) {
 		} catch (IllegalAccessException e) {
 		}
-		new LoginView();
+		new LoginController(new LoginModel(), new LoginView());
 	}
 }

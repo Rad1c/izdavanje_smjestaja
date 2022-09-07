@@ -10,31 +10,33 @@ import models.GeneralTableModel;
 import views.AppView;
 import views.TreeView;
 
-public class TreeController implements TreeSelectionListener{
+public class TreeController implements TreeSelectionListener {
 	AppModel appModel;
 	AppView appView;
 	TreeView treeView;
-	
-	
+
 	public TreeController(AppModel appModel, AppView appView) {
 		this.appModel = appModel;
 		this.appView = appView;
 		this.treeView = new TreeView(appModel, appView);
-	}
-	
+		treeView.setSelecetionListener(this);
+	}	
 
 	@Override
-		public void valueChanged(TreeSelectionEvent e) {
-			JTree tree = (JTree) e.getSource();
-			DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree
-			        .getLastSelectedPathComponent();
-			String selectedNodeName = selectedNode.toString();
-			
-			System.out.println("xx");
-			if(selectedNode.isLeaf()) {
-				appModel.setGeneralTableModel(new GeneralTableModel(selectedNodeName));
-				new GeneralTableController(appModel, appView);
-			}
+	public void valueChanged(TreeSelectionEvent e) {
+		JTree tree = (JTree) e.getSource();
+		DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
+		String selectedNodeName = selectedNode.toString();
+
+		if (selectedNode.isLeaf()) {
+			appView.getPnlTable().removeAll();
+			appView.getPnlTable().revalidate();
+			appView.getPnlTable().repaint();
+			appModel.setGeneralTableModel(new GeneralTableModel(selectedNodeName));
+			new GeneralTableController(appModel, appView);
+			appView.getStatusBarView().updateTableName(selectedNodeName);
+			appView.getStatusBarView().updateSelectedRow(0, 0);
 		}
+	}
 
 }

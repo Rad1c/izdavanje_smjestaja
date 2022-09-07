@@ -18,8 +18,8 @@ public class GeneralTableView {
 
 	public GeneralTableView(JPanel pnlTable, String[][] data, String[] columns) {
 
-		pnlTable.setLayout(new BorderLayout());
 		pnlTable.removeAll();
+		pnlTable.setLayout(new BorderLayout());
 
 		table = new JTable(data, columns) {
 			private static final long serialVersionUID = 1L;
@@ -27,12 +27,18 @@ public class GeneralTableView {
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			};
+			
+			public boolean getScrollableTracksViewportWidth()
+            {
+                return getPreferredSize().width < getParent().getWidth();
+            }
 		};
 
 		table.setPreferredScrollableViewportSize(new Dimension(200, 250));
 		table.setFillsViewportHeight(true);
 
 		this.model = table.getSelectionModel();
+		
 		JScrollPane scrlTable = new JScrollPane(table);
 		pnlTable.add(scrlTable, BorderLayout.SOUTH);
 

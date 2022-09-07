@@ -32,7 +32,6 @@ public class ToolBarView {
 		JToolBar toolbar = new JToolBar();  
 		toolbar.setLayout(new BoxLayout(toolbar, BoxLayout.X_AXIS));
 		toolbar.add(Box.createRigidArea(new Dimension(50, 20)));
-        toolbar.setRollover(true);  
         setButtonsMarginsAndBorders();
         setctionComands();
         

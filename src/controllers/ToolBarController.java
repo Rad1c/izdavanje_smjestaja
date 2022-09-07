@@ -19,7 +19,7 @@ public class ToolBarController implements ActionListener {
 		this.appView = appView;
 		this.toolBarModel = new ToolBarModel();
 		this.appModel.setToolBarModel(this.toolBarModel);
-		this.toolbarView = new ToolBarView(appView.getPnlHeader());
+		this.toolbarView = new ToolBarView(appView.getPnlUserLogout());
 		this.toolbarView.addActionListeners(this);
 	}
 

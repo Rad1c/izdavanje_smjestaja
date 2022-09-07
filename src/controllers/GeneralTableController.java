@@ -21,14 +21,12 @@ public class GeneralTableController implements ListSelectionListener {
 		this.generalTableView = new GeneralTableView(appView.getPnlTable(), data, columnsNames);
 		this.generalTableView.addListener(this);
 		appView.setGeneralTableView(this.generalTableView);
-
 	}
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		System.out.println("selektovanoooo ide gasss");
-
 		ListSelectionModel model = generalTableView.getModel();
+
 		if (!model.isSelectionEmpty()) {
 			int rowNo = model.getMinSelectionIndex() + 1;
 			appView.getStatusBarView().updateSelectedRow(rowNo, generalTableView.getTable().getRowCount());

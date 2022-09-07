@@ -2,8 +2,6 @@ package parsers;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -66,20 +64,19 @@ public class XMLParser implements IParserType {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document doc = builder.parse(xmlPath);
 			NodeList tableList = doc.getElementsByTagName("table");
-			
 
 			for (int i = 0; i < tableList.getLength(); i++) {
 				Node t = tableList.item(i);
-				
+
 				if (t.getNodeType() == Node.ELEMENT_NODE) {
 					Element table = (Element) t;
-					if(tableName.equals(table.getAttribute("tableName"))) {
+					if (tableName.equals(table.getAttribute("tableName"))) {
 						NodeList columnsList = table.getChildNodes();
-						
-						for(int j = 0; j < columnsList.getLength(); j++) {
+
+						for (int j = 0; j < columnsList.getLength(); j++) {
 							Node c = columnsList.item(j);
-							
-							if(c.getNodeType() == Node.ELEMENT_NODE) {
+
+							if (c.getNodeType() == Node.ELEMENT_NODE) {
 								Element column = (Element) c;
 								ColumnModel columnModel = new ColumnModel();
 								columnModel.setDbColumnName(column.getAttribute("dbColumnName"));
@@ -90,7 +87,7 @@ public class XMLParser implements IParserType {
 								columnModel.setNullable(Boolean.parseBoolean(column.getAttribute("isNullable")));
 								columnModel.setColumnName(column.getTextContent());
 								columnModel.setShow(Boolean.parseBoolean(column.getAttribute("show")));
-								
+
 								columns.add(columnModel);
 							}
 						}

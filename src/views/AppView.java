@@ -2,27 +2,30 @@ package views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import controllers.AppController;
+
 public class AppView {
+	Font font1 = new Font("Tahoma", Font.BOLD, 13);
+	Font font2 = new Font("Tahoma", Font.BOLD, 12);
+	JLabel logout;
 	JFrame frApp;
 	JLabel username;
-	JLabel logout;
-	Font font = new Font("Tahoma", Font.BOLD, 12);
 	JPanel pnlHeader;
 	JPanel pnlTree;
 	JPanel pnlTable;
 	JPanel pnlInputFields;
+	JPanel pnlUserLogout;
+
 	MenuView menuView;
 	ToolBarView toolbarView;
 	StatusBarView statusBarView;
@@ -32,7 +35,8 @@ public class AppView {
 	public AppView() {
 		this.frApp = new JFrame();
 		username = new JLabel();
-		logout = new JLabel("Logout");
+		logout = new JLabel("  Logout   ");
+		logout.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 		ImageIcon icon = new ImageIcon("images/icon.png");
 		frApp.setTitle("Izdavanje smjestaja");
@@ -47,50 +51,19 @@ public class AppView {
 		pnlHeader.setBackground(Color.decode("#FDFBFB"));
 		pnlHeader.setLayout(new BorderLayout());
 
-		JPanel pnlUserLogout = new JPanel();
+		pnlUserLogout = new JPanel();
 
 		pnlUserLogout.setLayout(new BorderLayout());
 		JPanel pnlUser = new JPanel();
-		pnlUserLogout.add(new JLabel(""));
-		pnlUserLogout.add(new JLabel(""));
+
 		pnlUser.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 8));
 		JLabel userImg = new JLabel("");
 		userImg.setIcon(new ImageIcon("images/user_small.png"));
 		pnlUser.add(userImg);
 
-		this.username.setFont(font);
-		this.logout.setFont(font);
+		this.username.setFont(font2);
+		this.logout.setFont(font1);
 
-		logout.addMouseListener(new MouseListener() {
-			public void mousePressed(MouseEvent e) {
-
-			}
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-
-				frApp.dispose();
-				new LoginView();
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
 		pnlUser.add(this.username);
 		pnlUser.add(new JLabel("    "));
 		pnlUser.add(logout);
@@ -110,7 +83,7 @@ public class AppView {
 		pnlTree.setPreferredSize(new Dimension(250, 200));
 		frApp.add(panel);
 
-		pnlHeader.add(pnlUserLogout, BorderLayout.PAGE_END);
+		pnlHeader.add(pnlUserLogout, BorderLayout.PAGE_START);
 		pnlContent.add(pnlTable, BorderLayout.CENTER);
 		pnlContent.add(pnlInputFields, BorderLayout.PAGE_END);
 		pnlContainer.add(pnlTree, BorderLayout.WEST);
@@ -122,6 +95,10 @@ public class AppView {
 		frApp.setMinimumSize(new Dimension(ScrWidth, ScrHeight));
 		frApp.setVisible(true);
 		frApp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	public void setActionListener(AppController appController) {
+		logout.addMouseListener(appController);
 	}
 
 	public void setUsername(String username) {
@@ -182,6 +159,10 @@ public class AppView {
 
 	public void setGeneralTableView(GeneralTableView generalTableView) {
 		this.generalTableView = generalTableView;
+	}
+
+	public JPanel getPnlUserLogout() {
+		return pnlUserLogout;
 	}
 
 }

@@ -48,7 +48,7 @@ public class GeneralTableModel {
 			
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("(class: GeneralTableModel) " + e.toString());
 		}
 	}
 
