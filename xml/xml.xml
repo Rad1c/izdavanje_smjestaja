@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database>
+	<connection address="78.28.157.8" database="PIS2022" username="EtfPIS2022G4" password="EtfPIS2022G46913" port="1433" schema="pisg4"/>
+	<tables>
+		<table tableName = "rezervacije">
+			<column dbColumnName="smjestajna_jedinica_id" dataType = "number" isPk="true" isFk ="false" isNullable="false" target = "" show="false" linkedField="false">smjestajna_jedinica_id</column>
+			<column dbColumnName="rezervacija_id" dataType = "number" isPk="true" isFk ="false" isNullable="false" target = "" show="false" linkedField="false">rezervacija_id</column>
+			<column dbColumnName="osoba_id" dataType = "number" isPk="false" isFk ="true" isNullable="false" target = "osoba" show="false" linkedField="false">osoba_id</column>
+			<column dbColumnName="oznaka" dataType = "string" isPk="false" isFk ="true" isNullable="false" target = "registar_zaposlenih" show="false" linkedField="false">oznaka</column>
+			<column dbColumnName="identifikator" dataType = "number" isPk="false" isFk ="true" isNullable="false" target = "registar_zaposlenih" show="false" linkedField="false">identifikator</column>
+			<column dbColumnName="identifikator_zaposlenog" dataType = "number" isPk="false" isFk ="true" isNullable="false" target = "registar_zaposlenih" show="false" linkedField="false">identifikator_zaposlenog</column>
+			<column dbColumnName="vrsta_aranzmana_id" dataType = "number" isPk="false" isFk ="true" isNullable="false" target = "vrsta_aranzmana" show="false" linkedField="false">vrsta_aranzmana_id</column>
+			<column dbColumnName="smjestajna_jedinica_id" dataType = "number" isPk="false" isFk ="true" isNullable="false" target = "smjestajna_jedinica" show="false" linkedField="false">smjestajna_jedinica_id</column>
+			<column dbColumnName="naziv" dataType = "string" isPk="false" isFk ="false" isNullable="false" target = "smjestajna_jedinica" show="true" linkedField="true">smjestajna_jedinica</column>
+			<column dbColumnName="ime" dataType = "string" isPk="false" isFk ="false" isNullable="false" target = "registar_zaposlenih" show="false" linkedField="false">evidentirao_ime</column>
+			<column dbColumnName="prezime" dataType = "string" isPk="false" isFk ="false" isNullable="false" target = "registar_zaposlenih" show="true" linkedField="true">evidentirao_prezime</column>
+			<column dbColumnName="ime" dataType = "string" isPk="false" isFk ="false" isNullable="false" target = "osoba" show="true" linkedField="false">rezervisao_ime</column>
+			<column dbColumnName="prezime" dataType = "string" isPk="false" isFk ="false" isNullable="false" target = "osoba" show="true" linkedField="false">rezervisao_prezime</column>
+			<column dbColumnName="maticni_broj" dataType = "string" isPk="false" isFk ="false" isNullable="false" target = "osoba" show="true" linkedField="false">maticni_broj</column>
+			<column dbColumnName="check_in" dataType = "date" isPk="false" isFk ="false" isNullable="false" target = "" show="true" linkedField="false">check_in</column>
+			<column dbColumnName="check_out" dataType = "date" isPk="false" isFk ="false" isNullable="true" target = "" show="true" linkedField="false">check_out</column>
+			<column dbColumnName="djeca" dataType = "number" isPk="false" isFk ="false" isNullable="false" target = "" show="true" linkedField="false">djeca</column>
+			<column dbColumnName="odrasli" dataType = "number" isPk="false" isFk ="false" isNullable="false" target = "" show="true" linkedField="false">odrasli</column>
+			<column dbColumnName="aranzman" dataType = "string" isPk="false" isFk ="false" isNullable="false" target = "vrsta_aranzmana" show="true" linkedField="true">aranzman</column>
+			<column dbColumnName="posebni_zahtjevi_gosta" dataType = "string" isPk="false" isFk ="false" isNullable="true" target = "" show="true" linkedField="false">posebni_zahtjevi_gosta</column>
+		</table>
+		<table tableName = "smjestajna_jedinica">
+			<column dbColumnName="smjestajna_jedinica_id" dataType = "number" isPk="true" isFk ="false" isNullable="false" target = "" show="false" linkedField="false">smjestajna_jedinica_id</column>
+			<column dbColumnName="naziv" dataType = "string" isPk="false" isFk ="false" isNullable="false" target = "" show="true" linkedField="false">naziv smjestajne jedinice</column>
+			<column dbColumnName="adresa" dataType = "string" isPk="false" isFk ="false" isNullable="false" target = "" show="true" linkedField="false">adresa</column>
+			<column dbColumnName="kategorija" dataType = "string" isPk="false" isFk ="false" isNullable="false" target = "" show="true" linkedField="false">kategorija</column>
+			<column dbColumnName="kapacitet" dataType = "number" isPk="false" isFk ="false" isNullable="false" target = "" show="true" linkedField="false">kapacitet</column>
+			<column dbColumnName="web_stranica" dataType = "string" isPk="false" isFk ="false" isNullable="false" target = "" show="true" linkedField="false">WEB stranica</column>
+		</table>
+		<table tableName = "vrsta_aranzmana">
+			<column dbColumnName="vrsta_aranzmana_id" dataType = "number" isPk="true" isFk ="false" isNullable="false" target = "" show="false" linkedField="false">vrsta_aranzmana_id</column>
+			<column dbColumnName="aranzman" dataType = "string" isPk="false" isFk ="false" isNullable="false" target = "" show="true" linkedField="false">aranzman</column>
+		</table>
+		<table tableName = "registar_zaposlenih">
+			<column dbColumnName="oznaka" dataType = "string" isPk="true" isFk ="false" isNullable="false" target = "" show="false" linkedField="false">oznaka</column>
+			<column dbColumnName="identifikator" dataType = "number" isPk="true" isFk ="false" isNullable="false" target = "" show="false" linkedField="false">identifikator</column>
+			<column dbColumnName="identifikator_zaposlenog" dataType = "number" isPk="true" isFk ="false" isNullable="false" target = "" show="false" linkedField="false">identifikator_zaposlenog</column>
+			<column dbColumnName="prezime" dataType = "string" isPk="false" isFk ="false" isNullable="false" target = "" show="true" linkedField="false">zaposleni_prezime</column>
+			<column dbColumnName="ime_roditelja" dataType = "string" isPk="false" isFk ="false" isNullable="false" target = "" show="true" linkedField="false">ime_roditelja</column>
+			<column dbColumnName="ime" dataType = "string" isPk="false" isFk ="false" isNullable="false" target = "" show="true" linkedField="false">zaposleni_ime</column>
+			<column dbColumnName="pol" dataType = "string" isPk="false" isFk ="false" isNullable="false" target = "" show="true" linkedField="false">pol</column>
+			<column dbColumnName="maticni_broj" dataType = "string" isPk="false" isFk ="false" isNullable="false" target = "" show="true" linkedField="false">maticni_broj</column>
+		</table>
+	</tables>
+</database>
