@@ -60,7 +60,7 @@ public class DialogBoxVIew {
 	
 	public void setTable(GeneralTableModel tableModel) {
 		mainPanel.setPreferredSize(new Dimension(dialogDim.width, (int)(dialogDim.height*0.80)));
-		generalTableView = new GeneralTableView(mainPanel, tableModel);
+		generalTableView = new GeneralTableView(mainPanel, tableModel, null);
 		generalTableView.setPositionCenter();
 		addButtons();
 	}

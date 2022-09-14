@@ -8,6 +8,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
+
 import controllers.DialogBoxController;
 import controllers.GeneralTableController;
 import models.GeneralTableModel;
@@ -25,16 +27,19 @@ public class GeneralTableView implements Observer {
 	String[][] data;
 	String[] columns;
 	JPanel pnlTableContainer;
+	GeneralTableController generalTableController = null;
 
-	public GeneralTableView(JPanel pnlTable, GeneralTableModel tableModel) {
+	public GeneralTableView(JPanel pnlTable, GeneralTableModel tableModel, GeneralTableController generalTableController) {
 		this.pnlTable = pnlTable;
 		this.tableModel = tableModel;
+		this.generalTableController = generalTableController;
 		pnlTableContainer = new JPanel(new BorderLayout());
 		pnlTable.add(pnlTableContainer, BorderLayout.PAGE_START);
 		int width = pnlTable.getWidth();
 		pnlTableContainer.setPreferredSize(new Dimension(width, 270));
 		init();
 	}
+
 
 	public void init() {
 		this.pnlTableContainer.removeAll();
@@ -99,7 +104,9 @@ public class GeneralTableView implements Observer {
 	@Override
 	public void update() {
 		init();
-
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		model = table.getSelectionModel();
+		model.addListSelectionListener(generalTableController);
 	}
 
 	public void setModel(ListSelectionModel model) {

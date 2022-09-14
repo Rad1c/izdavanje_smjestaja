@@ -84,7 +84,7 @@ public class InputFieldsController implements ActionListener {
 				boolean success = appModel.getGeneralTableModel().update(columnsUpdate, appModel.getUser());
 
 				if (success) {
-					JOptionPane.showMessageDialog(null, "Row was updated.");
+					JOptionPane.showMessageDialog(appView.getFrApp(), "Row was updated.", "Update row", JOptionPane.INFORMATION_MESSAGE);
 					inputFieldsView.close();
 					appModel.setApplicationState(new WorkingState());
 					appView.getStatusBarView().updateState(appModel.getApplicationState().toString());
@@ -92,9 +92,9 @@ public class InputFieldsController implements ActionListener {
 							appModel.getGeneralTableModel().getCurrentSelectedRow() - 1,
 							appModel.getGeneralTableModel().getCurrentSelectedRow() - 1);
 				} else
-					JOptionPane.showMessageDialog(null, "Row was not updated.", "Error", JOptionPane.OK_OPTION);
+					JOptionPane.showMessageDialog(appView.getFrApp(), "Row was not updated.", "Error", JOptionPane.ERROR_MESSAGE);
 			} else {
-				JOptionPane.showMessageDialog(null, "Incorrect data!", "Error", JOptionPane.OK_OPTION);
+				JOptionPane.showMessageDialog(appView.getFrApp(), "Incorrect data!", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			return;
 		}

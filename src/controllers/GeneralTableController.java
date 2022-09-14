@@ -27,7 +27,7 @@ public class GeneralTableController implements ListSelectionListener, ActionList
 		this.appView = appView;
 		appModel.getGeneralTableModel();
 
-		this.generalTableView = new GeneralTableView(appView.getPnlTable(), appModel.getGeneralTableModel());
+		this.generalTableView = new GeneralTableView(appView.getPnlTable(), appModel.getGeneralTableModel(), this);
 		this.generalTableView.addListener(this);
 		
 		appView.setGeneralTableView(this.generalTableView);
@@ -73,9 +73,11 @@ public class GeneralTableController implements ListSelectionListener, ActionList
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("delete")) {
-
-			int dlgRes = JOptionPane.showConfirmDialog(appView.getFrApp(), "Are you sure?");
+			System.out.println("delte usao");
+			int dlgRes = JOptionPane.showConfirmDialog(appView.getFrApp(), "Are you sure?", "Delete row", JOptionPane.YES_NO_CANCEL_OPTION);
+			
 			if (dlgRes == JOptionPane.YES_OPTION) {
+				dlgRes = -999;
 				if (appModel.getGeneralTableModel() == null)
 					return;
 
@@ -86,15 +88,15 @@ public class GeneralTableController implements ListSelectionListener, ActionList
 
 					if (success) {
 						inputFieldsController.inputFieldsView.close();
-						JOptionPane.showMessageDialog(null, "Row was deleted.");
+						JOptionPane.showMessageDialog(appView.getFrApp(), "Row was deleted.", "Message", JOptionPane.INFORMATION_MESSAGE);
 						return;
 						
 					} else {
-						JOptionPane.showMessageDialog(null, "Row was not deleted.", "Error", JOptionPane.OK_OPTION);
+						JOptionPane.showMessageDialog(appView.getFrApp(), "Row was not deleted.", "Error", JOptionPane.ERROR_MESSAGE);
 					}
 				} catch (HeadlessException e1) {
 					System.out.println("delete failed");
-					JOptionPane.showMessageDialog(null, "Row was not deleted.", "Error", JOptionPane.OK_OPTION);
+					JOptionPane.showMessageDialog(appView.getFrApp(), "Row was not deleted.", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 			return;

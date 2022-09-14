@@ -35,7 +35,6 @@ public class ToolBarView {
 		toolbar.add(Box.createRigidArea(new Dimension(50, 20)));
         setButtonsMarginsAndBorders();
         setctionComands();
-        disableEnableAllButtons(false);
         
         toolbar.add(firstRow);  
         firstRow.setToolTipText("First row");
@@ -143,7 +142,8 @@ public class ToolBarView {
 	
 	public void addActionListenersEdit(InputFieldsController inputFieldsController) {
 		editRow.addActionListener(inputFieldsController);
-		//deleteRow.addActionListener(inputFieldsController);
+		accept.addActionListener(inputFieldsController);
+		cancel.addActionListener(inputFieldsController);
 	}
 	
 	public void disableEnableAllButtons(boolean value)

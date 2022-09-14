@@ -226,6 +226,7 @@ public class GeneralTableModel implements Subject {
 			this.rows.remove(currentSelectedRow - 1);
 			notifyObserver();
 			success = true;
+			return true;
 
 		} catch (SQLException | ParseException e) {
 			System.out.println("(class: GeneralTableModel) " + e.toString());
