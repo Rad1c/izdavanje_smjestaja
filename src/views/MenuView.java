@@ -109,6 +109,7 @@ public class MenuView extends JMenuBar {
 	public void setActionListeners(MenuController menuController) {
 		mniSwitchXML.addActionListener(menuController);
 		mniExit.addActionListener(menuController);
+		mniAbout.addActionListener(menuController);
 	}
 	
 	public void setActionListeners(ToolBarController toolBarController) {

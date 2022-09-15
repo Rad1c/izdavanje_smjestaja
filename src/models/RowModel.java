@@ -70,6 +70,12 @@ public class RowModel {
 	public static void setCounter(int counter) {
 		RowModel.counter = counter;
 	}
+	
+	public void cleanRowData() {
+		for (ColumnModel column : columns) {
+			column.setColumnDataDirect("");
+		}
+	}
 
 	@Override
 	public String toString() {
@@ -80,22 +86,4 @@ public class RowModel {
 		}
 		return out;
 	}
-/*
-	public ArrayList<ColumnModel> clone(ArrayList<ColumnModel> col) throws CloneNotSupportedException {
-		ArrayList<ColumnModel> columnsCopy = new ArrayList<ColumnModel>();
-		for (ColumnModel c : col) {
-			ColumnModel columnCopy = new ColumnModel();
-			c.setDbColumnName(columnCopy.getDbColumnName());
-			c.setDataType(columnCopy.getDataType());
-			c.setFk(columnCopy.isFk());
-			c.setPk(columnCopy.isPk());
-			c.setNullable(columnCopy.isNullable);
-			c.setTarget(columnCopy.getTarget());
-			c.setShow(columnCopy.isShow());
-			c.setColumnName(columnCopy.getColumnName());
-			c.setLenkedField(columnCopy.isLenkedField());
-		}
-
-		return columnsCopy;
-	}*/
 }

@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import controllers.InputFieldsController;
+import controllers.InsertRowController;
 import helpers.EnableDisableComponents;
 import models.ColumnModel;
 import models.Observer;
@@ -25,14 +26,14 @@ public class InputFieldsView implements Observer {
 	ArrayList<FieldView> fields = new ArrayList<FieldView>();
 	RowModel row;
 
-	public InputFieldsView(JPanel pnlInputFields, RowModel row) {
+	public InputFieldsView(JPanel pnlInputFields, RowModel row, boolean edit) {
 		this.row = row;
 		this.pnlInputFields = pnlInputFields;
 
-		init();
+		init(edit);
 	}
 
-	public void init() {
+	public void init(boolean edit) {
 		this.pnlInputFields.setLayout(new MigLayout());
 		this.pnlInputFields.setBorder(BorderFactory.createLineBorder(Color.decode("#828790")));
 		this.pnlInputFields.setBackground(Color.decode("#ece8e7"));
@@ -42,7 +43,7 @@ public class InputFieldsView implements Observer {
 
 		pnlHeader.setBackground(Color.decode("#ece8e7"));
 
-		inputHeaderView = new InputHeaderView(pnlHeader, true);
+		inputHeaderView = new InputHeaderView(pnlHeader, edit);
 		this.pnlInputFields.add(pnlHeader,
 				"wrap, width " + (int) (widith * 0.5) + ":" + (int) (widith * 95) + ":" + widith);
 
@@ -69,6 +70,14 @@ public class InputFieldsView implements Observer {
 		for (FieldView f : fields) {
 			if (f.getColumn().isLenkedField()) {
 				f.setActionListeners(inputFieldsController);
+			}
+		}
+	}
+	
+	public void setBtnLinkedFieldsActList(InsertRowController insertRowController) {
+		for (FieldView f : fields) {
+			if (f.getColumn().isLenkedField()) {
+				f.setActionListeners(insertRowController);
 			}
 		}
 	}
@@ -130,7 +139,6 @@ public class InputFieldsView implements Observer {
 
 	@Override
 	public void update() {
-		// pnlFields.removeAll();
 		pnlFields.revalidate();
 		pnlFields.repaint();
 		for (FieldView f : fields) {

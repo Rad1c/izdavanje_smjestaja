@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import controllers.InputFieldsController;
+import controllers.InsertRowController;
 import models.ColumnModel;
 
 public class FieldView extends JPanel {
@@ -81,6 +82,10 @@ public class FieldView extends JPanel {
 
 	public void setActionListeners(InputFieldsController inputFieldsController) {
 		btnLinkedField.addActionListener(inputFieldsController);
+	}
+	
+	public void setActionListeners(InsertRowController insertRowController) {
+		btnLinkedField.addActionListener(insertRowController);
 	}
 
 	public boolean checkInputFields(HashMap<String, Integer> columnsDataLength) {

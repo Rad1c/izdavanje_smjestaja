@@ -238,6 +238,82 @@ public class GeneralTableModel implements Subject {
 		return success;
 	}
 
+	public boolean insert(ArrayList<ColumnModel> columnsInsert, User user) {
+		boolean success = true;
+
+		Connection db = DBConnection.getConnection();
+		ConnectionInfo connInfo = XMLParser.getConnectionString();
+		String procedureName = connInfo.getSchema() + ".sp" + tableName.substring(0, 1).toUpperCase()
+				+ tableName.substring(1) + "_insert(";
+		for (int i = 0; i < columns.size() + 1; i++)
+			procedureName += "?,";
+		procedureName += "?)";
+
+		try {
+			CallableStatement procedureStatement = db.prepareCall("{ call " + procedureName + " }");
+			procedureStatement.setString(1, user.getOznaka());
+			procedureStatement.setInt(2, user.getIdentifikator());
+
+			for (int i = 0; i < columnsInsert.size(); i++) {
+				if (columnsInsert.get(i).isNullable() && (columnsInsert.get(i).getColumnData().equals("")
+						|| columnsInsert.get(i).getColumnData().equals("NULL"))) {
+					if (columnsInsert.get(i).getDataType().equals("string"))
+						procedureStatement.setNull(i + 3, Types.VARCHAR);
+					if (columnsInsert.get(i).getDataType().equals("boolean"))
+						procedureStatement.setNull(i + 3, Types.BOOLEAN);
+					if (columnsInsert.get(i).getDataType().equals("date"))
+						procedureStatement.setNull(i + 3, Types.DATE);
+					if (columnsInsert.get(i).getDataType().equals("number"))
+						procedureStatement.setNull(i + 3, Types.INTEGER);
+					continue;
+				}
+				
+				if(columnsInsert.get(i).getColumnData().equals("")) {
+					if (columnsInsert.get(i).getDataType().equals("string"))
+						procedureStatement.setString(i+3, "x");
+					if (columnsInsert.get(i).getDataType().equals("number"))
+						procedureStatement.setInt(i + 3, 1);
+					continue;
+				}
+
+				if (columnsInsert.get(i).getDataType().equals("string")) {
+					procedureStatement.setString(i + 3, columnsInsert.get(i).getColumnData());
+				}
+				if (columnsInsert.get(i).getDataType().equals("boolean")) {
+					System.out.println(columnsInsert.get(i).getColumnData());
+					boolean boolData = columnsInsert.get(i).getColumnData() == "DA" ? true : false;
+					procedureStatement.setBoolean(i + 3, boolData);
+				}
+				if (columnsInsert.get(i).getDataType().equals("number")) {
+					try {
+						procedureStatement.setInt(i + 3, Integer.parseInt(columnsInsert.get(i).getColumnData()));
+					} catch (NumberFormatException e) {
+						return false;
+					}
+				}
+				if (columnsInsert.get(i).getDataType().equals("date")) {
+					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+					Date myDate = formatter.parse(columnsInsert.get(i).getColumnData());
+					java.sql.Date sqlDate = new java.sql.Date(myDate.getTime());
+					procedureStatement.setDate(i + 3, sqlDate);
+				}
+			}
+
+			procedureStatement.execute();
+			RowModel newRow = new RowModel(XMLParser.getColumnsFromTableName(tableName));
+			newRow.setColumns(columnsInsert);
+			rows.add(newRow);
+			notifyObserver();
+			return true;
+		} catch (SQLException | ParseException e) {
+			success = false;
+			System.out.println("(class: generalTableModel) " + e.toString());
+			e.printStackTrace();
+		}
+
+		return success;
+	}
+	
 	public String getTableName() {
 		return tableName;
 	}
@@ -307,7 +383,6 @@ public class GeneralTableModel implements Subject {
 			int observerIndex = observers.indexOf(deleteObserver);
 			observers.remove(observerIndex);
 		}
-
 	}
 
 	@Override

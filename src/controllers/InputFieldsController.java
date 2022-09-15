@@ -37,7 +37,7 @@ public class InputFieldsController implements ActionListener {
 		this.appView = appView;
 		int selRow = appModel.getGeneralTableModel().getCurrentSelectedRow();
 		inputFieldsView = new InputFieldsView(appView.getPnlInputFields(),
-				appModel.getGeneralTableModel().getRow(selRow));
+				appModel.getGeneralTableModel().getRow(selRow), true);
 		this.pnlInputFields = inputFieldsView.getPnlInputFields();
 		inputFieldsView.getInputHeaderView().setActionListeners(this);
 		appView.getToolbarView().addActionListenersEdit(this);
@@ -47,8 +47,7 @@ public class InputFieldsController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("edit")  && appModel.getRowState() == RowCRUD.READ) {
-			System.out.println("edit");
+		if (e.getActionCommand().equals("edit") && appModel.getRowState() == RowCRUD.READ) {
 			appModel.setRowState(RowCRUD.UPDATE);
 			this.inputFieldsView.getInputHeaderView().getBtnCancel().setEnabled(true);
 			this.inputFieldsView.getInputHeaderView().getBtnAccept().setEnabled(true);
@@ -56,7 +55,7 @@ public class InputFieldsController implements ActionListener {
 			appModel.setApplicationState(new EditingState());
 			appView.getStatusBarView().updateState(appModel.getApplicationState().toString());
 		}
-		if (e.getActionCommand().equals("cancel")  && appModel.getRowState() == RowCRUD.UPDATE) {
+		if (e.getActionCommand().equals("cancel") && appModel.getRowState() == RowCRUD.UPDATE) {
 			appModel.setRowState(RowCRUD.READ);
 			this.pnlInputFields.removeAll();
 			this.pnlInputFields.repaint();
@@ -94,11 +93,14 @@ public class InputFieldsController implements ActionListener {
 					appView.getGeneralTableView().getTable().setRowSelectionInterval(
 							appModel.getGeneralTableModel().getCurrentSelectedRow() - 1,
 							appModel.getGeneralTableModel().getCurrentSelectedRow() - 1);
-					JOptionPane.showMessageDialog(appView.getFrApp(), "Row was updated.", "Update row", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(appView.getFrApp(), "Row was updated.", "Update row",
+							JOptionPane.INFORMATION_MESSAGE);
 				} else
-					JOptionPane.showMessageDialog(appView.getFrApp(), "Row was not updated.", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(appView.getFrApp(), "Row was not updated.", "Error",
+							JOptionPane.ERROR_MESSAGE);
 			} else {
-				JOptionPane.showMessageDialog(appView.getFrApp(), "Incorrect data!", "Error", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(appView.getFrApp(), "Incorrect data!", "Error",
+						JOptionPane.ERROR_MESSAGE);
 			}
 			return;
 		}
@@ -134,6 +136,5 @@ public class InputFieldsController implements ActionListener {
 				}
 			}
 		}
-
 	}
 }

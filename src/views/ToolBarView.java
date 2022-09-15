@@ -144,8 +144,8 @@ public class ToolBarView {
 	}
 	
 	public void setActionListener(GeneralTableController generalTableController) {
-		newRow.addActionListener(generalTableController);
 		deleteRow.addActionListener(generalTableController);
+		newRow.addActionListener(generalTableController);
 	}
 	
 	public void disableEnableAllButtons(boolean value)

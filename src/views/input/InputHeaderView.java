@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import controllers.InputFieldsController;
+import controllers.InsertRowController;
 
 
 public class InputHeaderView {
@@ -55,6 +56,15 @@ public class InputHeaderView {
 		this.btnCancel.setActionCommand("cancel");
 		this.btnEdit.setActionCommand("edit");
 	}
+	
+	public void setActionListeners(InsertRowController insertRowController) {
+		this.btnAccept.addActionListener(insertRowController);
+		this.btnCancel.addActionListener(insertRowController);
+		
+		this.btnAccept.setActionCommand("accept");
+		this.btnCancel.setActionCommand("cancel");
+	}
+	
 
 	public JButton getBtnEdit() {
 		return btnEdit;

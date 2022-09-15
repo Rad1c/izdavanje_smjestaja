@@ -1,7 +1,10 @@
 package controllers;
 
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JTable;
 
@@ -26,6 +29,7 @@ public class ToolBarController implements ActionListener {
 		this.toolbarView = new ToolBarView(appView.getPnlUserLogout());
 		appView.setToolbarView(this.toolbarView);
 		this.toolbarView.addActionListeners(this);
+		appView.getMenuView().setActionListeners(this);
 		toolbarView.newRow.addActionListener(this);
 		appView.getMenuView().setActionListeners(this);
 	}
@@ -59,6 +63,20 @@ public class ToolBarController implements ActionListener {
 					appModel.getGeneralTableModel().setCurrentSelectedRow(table.getSelectedRow() + 1);
 				}
 			}
+			
+			if(e.getActionCommand().equals("report")) {
+				if (Desktop.isDesktopSupported()) {
+					try {
+						File myFile = new File("reports/Blank_A4.pdf");
+						Desktop.getDesktop().open(myFile);
+						// JasperPrintManager.printReport( myFile, true);
+
+					} catch (IOException ex) {
+						System.out.println("no application registered for PDFs");
+					}
+				}
+			}
+			
 		} else {
 			appView.getToolbarView().disableEnableRowButtons(false);
 		}

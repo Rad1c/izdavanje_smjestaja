@@ -14,8 +14,11 @@ import javax.swing.event.ListSelectionListener;
 import enums.RowCRUD;
 import models.AppModel;
 import models.ColumnModel;
+import models.RowModel;
+import parsers.XMLParser;
 import views.AppView;
 import views.GeneralTableView;
+import views.InputFieldsView;
 
 public class GeneralTableController implements ListSelectionListener, ActionListener {
 	AppModel appModel;
@@ -28,7 +31,7 @@ public class GeneralTableController implements ListSelectionListener, ActionList
 		this.appModel = appModel;
 		this.appView = appView;
 		appModel.getGeneralTableModel();
-
+		appView.getToolbarView().enableAllButtons();
 		this.generalTableView = new GeneralTableView(appView.getPnlTable(), appModel.getGeneralTableModel(), this);
 		this.generalTableView.addListener(this);
 		appView.getToolbarView().setActionListener(this);
@@ -45,23 +48,18 @@ public class GeneralTableController implements ListSelectionListener, ActionList
 			int dlgRes = JOptionPane.showConfirmDialog(appView.getFrApp(), "Data you have entered may not be saved.",
 					"Message", JOptionPane.YES_NO_CANCEL_OPTION);
 			if (dlgRes != JOptionPane.YES_OPTION) {
-				System.out.println("izlazim");
 				return;
 			}
 		}
 		appModel.setRowState(RowCRUD.READ);
 
 		if (!model.isSelectionEmpty()) {
+			appView.getToolbarView().newRow.setEnabled(true);
 			int rowNo = model.getMinSelectionIndex() + 1;
 			appModel.getGeneralTableModel().setCurrentSelectedRow(rowNo);
 			appView.getPnlInputFields().removeAll();
 			appView.getPnlInputFields().repaint();
 			appView.getToolbarView().enableAllButtons();
-			/*
-			 * appView.getToolbarView().editRow.setEnabled(true);
-			 * appView.getToolbarView().deleteRow.setEnabled(true);
-			 * appView.getToolbarView().deleteRow.addActionListener(this);
-			 */
 			appModel.getGeneralTableModel().register(generalTableView);
 			appView.getStatusBarView().updateSelectedRow(rowNo, generalTableView.getTable().getRowCount());
 			inputFieldsController = new InputFieldsController(appModel, appView, generalTableView);
@@ -120,6 +118,21 @@ public class GeneralTableController implements ListSelectionListener, ActionList
 				}
 			}
 			appModel.setRowState(RowCRUD.READ);
+		}
+
+		if (e.getActionCommand().equals("new") && appModel.getRowState() == RowCRUD.READ) {
+			if (inputFieldsController != null && appModel.getRowState() != RowCRUD.READ) {
+				int dlgRes = JOptionPane.showConfirmDialog(appView.getFrApp(),
+						"Data you have entered may not be saved.", "Message", JOptionPane.YES_NO_CANCEL_OPTION);
+				if (dlgRes != JOptionPane.YES_OPTION) {
+					return;
+				} else {
+					inputFieldsController.inputFieldsView.close();
+					inputFieldsController = null;
+				}
+			}
+			
+			new InsertRowController(appModel, appView);
 		}
 
 	}
