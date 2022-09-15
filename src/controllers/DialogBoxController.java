@@ -44,7 +44,6 @@ public class DialogBoxController implements ActionListener, ListSelectionListene
 			tableModel = null;
 			selectedRow = -99;
 		}
-
 	}
 
 	@Override

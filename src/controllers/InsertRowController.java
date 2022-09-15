@@ -26,7 +26,7 @@ public class InsertRowController implements ActionListener {
 	InputFieldsView inputFieldsNewRow;
 	String tableName;
 	JPanel pnlInputFields;
-	
+
 	public InsertRowController(AppModel appModel, AppView appView) {
 		this.appModel = appModel;
 		this.appView = appView;
@@ -49,15 +49,15 @@ public class InsertRowController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("accept") && appModel.getRowState() == RowCRUD.CREATE) {
+		if (e.getActionCommand().equals("accept") && appModel.getRowState() == RowCRUD.CREATE) {
 			boolean valuesCorrect = true;
-			
+
 			appModel.setRowState(RowCRUD.READ);
 			for (FieldView fw : inputFieldsNewRow.getFields()) {
 				if (!fw.checkInputFields(appModel.getGeneralTableModel().getColumnDataLength()))
 					valuesCorrect = false;
 			}
-			
+
 			if (valuesCorrect) {
 				RowModel row = inputFieldsNewRow.getRow();
 
@@ -70,11 +70,6 @@ public class InsertRowController implements ActionListener {
 						}
 					}
 				}
-				
-				for (ColumnModel c : row.getColumns()) {
-					System.out.println("ime: " + c.getColumnName() + " podaci: " + c.getColumnData());
-				}
-				
 
 				appModel.getGeneralTableModel().setTableName(tableName);
 				boolean success = appModel.getGeneralTableModel().insert(columnsUpdate, appModel.getUser());
@@ -105,9 +100,9 @@ public class InsertRowController implements ActionListener {
 				appModel.setRowState(RowCRUD.CREATE);
 			}
 			return;
-			
+
 		}
-		if(e.getActionCommand().equals("cancel")  && appModel.getRowState() == RowCRUD.CREATE) {
+		if (e.getActionCommand().equals("cancel") && appModel.getRowState() == RowCRUD.CREATE) {
 			appModel.setRowState(RowCRUD.READ);
 			this.pnlInputFields.removeAll();
 			this.pnlInputFields.repaint();
@@ -138,7 +133,6 @@ public class InsertRowController implements ActionListener {
 						}
 					}
 					inputFieldsNewRow.setRow(row);
-					System.out.println(row.toString());
 					appModel.getGeneralTableModel().setTableName(tableName);
 
 					return;
@@ -146,5 +140,5 @@ public class InsertRowController implements ActionListener {
 			}
 		}
 	}
-	
+
 }

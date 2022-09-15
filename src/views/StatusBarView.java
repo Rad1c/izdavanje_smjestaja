@@ -19,23 +19,22 @@ import models.AppModel;
 
 public class StatusBarView {
 
-	//private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	private LocalDateTime now = LocalDateTime.now();
 	private Font fntLabel = new Font("Courier", Font.BOLD, 11);
 	private JPanel pnlStatusBar;
-	public JLabel lblState=new JLabel(), lblCurrentTable, lblCurrentRow, lblDateTime;
+	public JLabel lblState = new JLabel(), lblCurrentTable, lblCurrentRow, lblDateTime;
 	private AppModel appModel;
 
 	public StatusBarView(AppModel applicationModel) {
-		this.appModel=applicationModel;
+		this.appModel = applicationModel;
 		pnlStatusBar = new JPanel();
 		pnlStatusBar.setBorder(new BevelBorder(BevelBorder.LOWERED));
 		pnlStatusBar.setBackground(Color.decode("#f0f0f0"));
 		pnlStatusBar.setPreferredSize(new Dimension(1000, 30));
 		pnlStatusBar.setLayout(new BoxLayout(pnlStatusBar, BoxLayout.X_AXIS));
 
-		lblState.setText("State: "+ appModel.getApplicationState().toString());
+		lblState.setText("State: " + appModel.getApplicationState().toString());
 		lblCurrentTable = new JLabel("Currently selected table: none");
 		lblCurrentRow = new JLabel("Currently selected row: 00/nn");
 		lblDateTime = new JLabel("Date: " + dtf.format(now));
@@ -53,22 +52,18 @@ public class StatusBarView {
 		pnlStatusBar.add(lblCurrentTable);
 		pnlStatusBar.add(Box.createRigidArea(new Dimension(100, 0)));
 		pnlStatusBar.add(lblCurrentRow);
+	}
 
+	public void updateSelectedRow(int selectedRow, int numberOfRows) {
+		this.lblCurrentRow.setText("Currently selected row:" + selectedRow + "/" + numberOfRows);
 	}
-	
-	public void updateSelectedRow(int selectedRow, int numberOfRows)
-	{
-		this.lblCurrentRow.setText("Currently selected row:"+selectedRow+"/"+numberOfRows);
+
+	public void updateTableName(String newTableName) {
+		this.lblCurrentTable.setText("Currently selected table: " + newTableName);
 	}
-	
-	public void updateTableName(String newTableName)
-	{
-		this.lblCurrentTable.setText("Currently selected table: "+newTableName);
-	}
-	
-	public void updateState(String state)
-	{
-		this.lblState.setText("State: "+state);
+
+	public void updateState(String state) {
+		this.lblState.setText("State: " + state);
 	}
 
 	public void setStatusBar(JFrame frApp) {

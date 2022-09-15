@@ -104,19 +104,15 @@ public class AppView {
 		frApp.setMinimumSize(new Dimension(ScrWidth, (int) (ScrHeight * 0.95)));
 		frApp.setVisible(true);
 		frApp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		frApp.addWindowListener(new WindowAdapter()
-		{
-		    @Override
-		    public void windowClosing(WindowEvent e)
-		    {
-		        super.windowClosing(e);
-		        DBConnection.closeConnection();
-		    }
+
+		frApp.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				super.windowClosing(e);
+				DBConnection.closeConnection();
+			}
 		});
 	}
-	
-	
 
 	public void setTableName(String tableName) {
 		this.lblTableName.setHorizontalAlignment(SwingConstants.CENTER);

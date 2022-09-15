@@ -20,14 +20,13 @@ public class TableCellRenderer extends DefaultTableCellRenderer {
 			int row, int column) {
 
 		Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		
+
 		table.getTableHeader().setPreferredSize(new Dimension(20, 30));
 
 		for (int i = 0; i < table.getModel().getRowCount(); i++)
 			table.setRowHeight(i, 30);
 
 		c.setFont(new Font("Times New Roman", Font.ITALIC, 12));
-		//c.setForeground(Color.decode("#6b6a6e"));
 
 		if (row % 2 == 0) {
 			c.setBackground(Color.decode("#fffefe"));

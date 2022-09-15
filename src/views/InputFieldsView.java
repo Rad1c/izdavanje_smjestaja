@@ -29,7 +29,6 @@ public class InputFieldsView implements Observer {
 	public InputFieldsView(JPanel pnlInputFields, RowModel row, boolean edit) {
 		this.row = row;
 		this.pnlInputFields = pnlInputFields;
-
 		init(edit);
 	}
 
@@ -73,7 +72,7 @@ public class InputFieldsView implements Observer {
 			}
 		}
 	}
-	
+
 	public void setBtnLinkedFieldsActList(InsertRowController insertRowController) {
 		for (FieldView f : fields) {
 			if (f.getColumn().isLenkedField()) {

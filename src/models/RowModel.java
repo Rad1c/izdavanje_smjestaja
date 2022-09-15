@@ -70,7 +70,7 @@ public class RowModel {
 	public static void setCounter(int counter) {
 		RowModel.counter = counter;
 	}
-	
+
 	public void cleanRowData() {
 		for (ColumnModel column : columns) {
 			column.setColumnDataDirect("");

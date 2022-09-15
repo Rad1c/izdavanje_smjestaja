@@ -267,10 +267,10 @@ public class GeneralTableModel implements Subject {
 						procedureStatement.setNull(i + 3, Types.INTEGER);
 					continue;
 				}
-				
-				if(columnsInsert.get(i).getColumnData().equals("")) {
+
+				if (columnsInsert.get(i).getColumnData().equals("")) {
 					if (columnsInsert.get(i).getDataType().equals("string"))
-						procedureStatement.setString(i+3, "x");
+						procedureStatement.setString(i + 3, "x");
 					if (columnsInsert.get(i).getDataType().equals("number"))
 						procedureStatement.setInt(i + 3, 1);
 					continue;
@@ -313,7 +313,7 @@ public class GeneralTableModel implements Subject {
 
 		return success;
 	}
-	
+
 	public String getTableName() {
 		return tableName;
 	}

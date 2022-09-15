@@ -28,12 +28,10 @@ public class InputHeaderView {
 		btnCancel.setEnabled(false);
 		btnEdit = new JButton("Edit");
 		setButtons();
-		
 		pnlHeader.add(btnAccept);
 		pnlHeader.add(btnCancel);
 		if(edit)
 			pnlHeader.add(btnEdit);
-		
 	}
 	
 	public void setButtons() {

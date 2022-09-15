@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
@@ -27,7 +26,7 @@ public class DialogBoxVIew {
 	JButton btnCancel;
 	Dimension dialogDim;
 	JFrame frame;
-	
+
 	public DialogBoxVIew(String tableName, JFrame frame) {
 		this.frame = frame;
 		this.tableName = tableName;
@@ -57,18 +56,18 @@ public class DialogBoxVIew {
 		return container;
 
 	}
-	
+
 	public void setTable(GeneralTableModel tableModel) {
-		mainPanel.setPreferredSize(new Dimension(dialogDim.width, (int)(dialogDim.height*0.80)));
+		mainPanel.setPreferredSize(new Dimension(dialogDim.width, (int) (dialogDim.height * 0.80)));
 		generalTableView = new GeneralTableView(mainPanel, tableModel, null);
 		generalTableView.setPositionCenter();
 		addButtons();
 	}
-	
+
 	protected void addButtons() {
 		Dimension scrnSize = Toolkit.getDefaultToolkit().getScreenSize();
 		JPanel pnlButtons = new JPanel(new MigLayout());
-		pnlButtons.setSize((int)dialogDim.width, (int)(dialogDim.height * 0.55));
+		pnlButtons.setSize((int) dialogDim.width, (int) (dialogDim.height * 0.55));
 		pnlButtons.setBackground(Color.decode("#efefef"));
 		btnOk = new JButton("OK");
 		btnOk.setFocusable(false);
@@ -80,7 +79,7 @@ public class DialogBoxVIew {
 		btnCancel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mainPanel.add(pnlButtons, BorderLayout.PAGE_END);
 	}
-	
+
 	public void addBtnActionListeners(DialogBoxController boxController) {
 		btnOk.setActionCommand("ok");
 		btnCancel.setActionCommand("cancel");
@@ -94,7 +93,6 @@ public class DialogBoxVIew {
 		}
 		this.dialog.setVisible(true);
 	}
-
 
 	public void close() {
 		this.dialog.removeAll();

@@ -8,8 +8,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingUtilities;
-
 import controllers.DialogBoxController;
 import controllers.GeneralTableController;
 import models.GeneralTableModel;
@@ -29,7 +27,8 @@ public class GeneralTableView implements Observer {
 	JPanel pnlTableContainer;
 	GeneralTableController generalTableController = null;
 
-	public GeneralTableView(JPanel pnlTable, GeneralTableModel tableModel, GeneralTableController generalTableController) {
+	public GeneralTableView(JPanel pnlTable, GeneralTableModel tableModel,
+			GeneralTableController generalTableController) {
 		this.pnlTable = pnlTable;
 		this.tableModel = tableModel;
 		this.generalTableController = generalTableController;
@@ -39,7 +38,6 @@ public class GeneralTableView implements Observer {
 		pnlTableContainer.setPreferredSize(new Dimension(width, 270));
 		init();
 	}
-
 
 	public void init() {
 		this.pnlTableContainer.removeAll();

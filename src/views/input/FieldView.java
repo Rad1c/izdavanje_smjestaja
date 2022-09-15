@@ -83,7 +83,7 @@ public class FieldView extends JPanel {
 	public void setActionListeners(InputFieldsController inputFieldsController) {
 		btnLinkedField.addActionListener(inputFieldsController);
 	}
-	
+
 	public void setActionListeners(InsertRowController insertRowController) {
 		btnLinkedField.addActionListener(insertRowController);
 	}

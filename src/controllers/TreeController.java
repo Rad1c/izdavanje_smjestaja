@@ -21,7 +21,7 @@ public class TreeController implements TreeSelectionListener {
 		this.appView = appView;
 		this.treeView = new TreeView(appModel, appView);
 		treeView.setSelecetionListener(this);
-	}	
+	}
 
 	@Override
 	public void valueChanged(TreeSelectionEvent e) {
@@ -43,7 +43,7 @@ public class TreeController implements TreeSelectionListener {
 			appView.getStatusBarView().updateState(appModel.getApplicationState().toString());
 		}
 	}
-	
+
 	public void revalidateUI() {
 		new ToolBarController(this.appModel, this.appView);
 		appView.getPnlTable().removeAll();

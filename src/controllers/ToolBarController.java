@@ -63,8 +63,8 @@ public class ToolBarController implements ActionListener {
 					appModel.getGeneralTableModel().setCurrentSelectedRow(table.getSelectedRow() + 1);
 				}
 			}
-			
-			if(e.getActionCommand().equals("report")) {
+
+			if (e.getActionCommand().equals("report")) {
 				if (Desktop.isDesktopSupported()) {
 					try {
 						File myFile = new File("reports/Blank_A4.pdf");
@@ -76,7 +76,7 @@ public class ToolBarController implements ActionListener {
 					}
 				}
 			}
-			
+
 		} else {
 			appView.getToolbarView().disableEnableRowButtons(false);
 		}

@@ -3,7 +3,6 @@ package state;
 import views.AppView;
 import views.ToolBarView;
 
-
 public class IdleState implements ApplicationState {
 
 	@Override
@@ -33,19 +32,19 @@ public class IdleState implements ApplicationState {
 	@Override
 	public ToolBarView getToolBarView(AppView applicationView) {
 		applicationView.setToolbarView(new ToolBarView(applicationView.getPnlHeader()));
-		//applicationView.add(applicationView.getToolbarView(),BorderLayout.NORTH);
+		// applicationView.add(applicationView.getToolbarView(),BorderLayout.NORTH);
 		return applicationView.getToolbarView();
 	}
 
 	@Override
 	public void enanbleButtons(ToolBarView toolBarView) {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "Idle";
-		
+
 	}
 }

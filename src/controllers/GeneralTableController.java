@@ -14,11 +14,8 @@ import javax.swing.event.ListSelectionListener;
 import enums.RowCRUD;
 import models.AppModel;
 import models.ColumnModel;
-import models.RowModel;
-import parsers.XMLParser;
 import views.AppView;
 import views.GeneralTableView;
-import views.InputFieldsView;
 
 public class GeneralTableController implements ListSelectionListener, ActionListener {
 	AppModel appModel;
@@ -131,9 +128,8 @@ public class GeneralTableController implements ListSelectionListener, ActionList
 					inputFieldsController = null;
 				}
 			}
-			
+
 			new InsertRowController(appModel, appView);
 		}
-
 	}
 }

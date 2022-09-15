@@ -32,7 +32,7 @@ public class MenuView extends JMenuBar {
 		mnuFile = new JMenu("File");
 		mnuEdit = new JMenu("Edit");
 		mnuHelp = new JMenu("Help");
-		
+
 		mnuFile.setMnemonic(KeyEvent.VK_F);
 		mnuEdit.setMnemonic(KeyEvent.VK_E);
 		mnuHelp.setMnemonic(KeyEvent.VK_H);
@@ -50,13 +50,14 @@ public class MenuView extends JMenuBar {
 		mniCancel = new JMenuItem("cancel");
 		mniReport = new JMenuItem("report");
 		mniAbout = new JMenuItem("About");
-		
-		mniSwitchXML.setAccelerator(KeyStroke.getKeyStroke('G', Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
+
+		mniSwitchXML
+				.setAccelerator(KeyStroke.getKeyStroke('G', Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
 		mniNew.setAccelerator(KeyStroke.getKeyStroke('Q', Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
 		mniEdit.setAccelerator(KeyStroke.getKeyStroke('E', Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
-		mniDelete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE,0));
+		mniDelete.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0));
 		mniAccept.setAccelerator(KeyStroke.getKeyStroke('W', Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
-		mniCancel.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE,0));
+		mniCancel.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0));
 		mniReport.setAccelerator(KeyStroke.getKeyStroke('R', Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
 
 		mnuFile.add(mniSwitchXML);
@@ -111,7 +112,7 @@ public class MenuView extends JMenuBar {
 		mniExit.addActionListener(menuController);
 		mniAbout.addActionListener(menuController);
 	}
-	
+
 	public void setActionListeners(ToolBarController toolBarController) {
 		mniFirst.addActionListener(toolBarController);
 		mniPrevious.addActionListener(toolBarController);
@@ -119,17 +120,16 @@ public class MenuView extends JMenuBar {
 		mniLast.addActionListener(toolBarController);
 		mniReport.addActionListener(toolBarController);
 	}
-	
+
 	public void setActionListeners(InputFieldsController inputFieldsController) {
 		mniEdit.addActionListener(inputFieldsController);
 		mniAccept.addActionListener(inputFieldsController);
 		mniCancel.addActionListener(inputFieldsController);
 	}
-	
+
 	public void setActionListener(GeneralTableController generalTableController) {
 		mniNew.addActionListener(generalTableController);
 		mniDelete.addActionListener(generalTableController);
 	}
-	
 
 }

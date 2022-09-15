@@ -16,5 +16,4 @@ public class StatusBarController {
 		this.statusBarView.setStatusBar(this.appView.getFrApp());
 		this.appView.setStatusBarView(this.statusBarView);
 	}
-
 }

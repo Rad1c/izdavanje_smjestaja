@@ -26,7 +26,6 @@ public class LoginController implements ActionListener {
 		String[] usernamePassword = loginModel.getSavedUsernamPassword();
 		loginView.getTxtUsername().setText(usernamePassword[0]);
 		loginView.getPasswordField().setText(usernamePassword[1]);
-
 	}
 
 	@Override

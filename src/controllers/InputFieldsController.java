@@ -129,7 +129,6 @@ public class InputFieldsController implements ActionListener {
 						}
 					}
 					inputFieldsView.setRow(row);
-					System.out.println(row.toString());
 					appModel.getGeneralTableModel().setTableName(tableName);
 
 					return;

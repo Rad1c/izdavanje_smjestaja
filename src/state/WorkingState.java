@@ -29,7 +29,6 @@ public class WorkingState implements ApplicationState {
 		return null;
 	}
 
-
 	@Override
 	public ToolBarView getToolBarView(AppView applicationView) {
 		// TODO Auto-generated method stub
@@ -40,10 +39,10 @@ public class WorkingState implements ApplicationState {
 	public void enanbleButtons(ToolBarView toolBarView) {
 		toolBarView.disableAllButtons();
 	}
+
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "Working";
-		
+
 	}
 }

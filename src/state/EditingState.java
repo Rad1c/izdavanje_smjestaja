@@ -38,12 +38,12 @@ public class EditingState implements ApplicationState {
 	@Override
 	public void enanbleButtons(ToolBarView toolBarView) {
 		toolBarView.enableAllButtons();
-		
+
 	}
+
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "Editing";
-		
+
 	}
 }

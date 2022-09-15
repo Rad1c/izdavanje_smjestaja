@@ -9,15 +9,15 @@ public class ColumnModel {
 	String columnName;
 	String dataType;
 	boolean isFk;
-	boolean isPk;	
+	boolean isPk;
 	boolean isNullable;
 	boolean isLenkedField;
 	String target = "";
 	boolean show = true;
 	String columnData = "NULL";
-	
+
 	public ColumnModel() {
-		
+
 	}
 
 	public ColumnModel(String dbColumnName, String dataType, boolean isFk, boolean isPk, boolean isNullable,
@@ -33,7 +33,7 @@ public class ColumnModel {
 		this.columnName = columnName;
 		this.isLenkedField = isLenkedField;
 	}
-	
+
 	public String getDbColumnName() {
 		return dbColumnName;
 	}
@@ -95,32 +95,28 @@ public class ColumnModel {
 	}
 
 	public void setColumnData(Object o) {
-		if(this.getDataType().equals("string")) {
+		if (this.getDataType().equals("string")) {
 			this.columnData = (String) o;
-		}
-		else if(this.getDataType().equals("boolean")) {
-			this.columnData = (Boolean) o? "DA": "NE";
-		}
-		else if(this.getDataType().equals("number")) {
+		} else if (this.getDataType().equals("boolean")) {
+			this.columnData = (Boolean) o ? "DA" : "NE";
+		} else if (this.getDataType().equals("number")) {
 			try {
 				this.columnData = String.valueOf((int) o);
 			} catch (Exception e) {
 				this.columnData = "";
 			}
-		}
-		else if(this.getDataType().equals("date")) {
+		} else if (this.getDataType().equals("date")) {
 			try {
-				Date date = (Date)o; 
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
-				String strDate = dateFormat.format(date);  
+				Date date = (Date) o;
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				String strDate = dateFormat.format(date);
 				this.columnData = strDate;
 			} catch (Exception e) {
 				this.columnData = "NULL";
 			}
-		}
-		else;
+		} else ;
 	}
-	
+
 	public void setColumnDataDirect(String data) {
 		this.columnData = data;
 	}
@@ -141,5 +137,4 @@ public class ColumnModel {
 		this.isLenkedField = isLenkedField;
 	}
 
-	
 }

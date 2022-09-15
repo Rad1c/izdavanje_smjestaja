@@ -4,8 +4,6 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import database.DBConnection;
@@ -82,14 +80,13 @@ public class AppModel {
 	public void setTableOpened(boolean tableOpened) {
 		this.tableOpened = tableOpened;
 	}
-	
+
 	public ApplicationState getApplicationState() {
 		return applicationState;
 	}
-	
+
 	public void setApplicationState(ApplicationState applicationState) {
 		this.applicationState = applicationState;
-		
 	}
 
 	public RowCRUD getRowState() {

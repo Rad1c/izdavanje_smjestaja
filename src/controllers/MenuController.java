@@ -64,9 +64,7 @@ public class MenuController implements ActionListener {
 				} catch (IOException e1) {
 					System.out.println(e1.toString() + "class: MenuController");
 				}
-
 			}
-
 		}
 
 		if (e.getActionCommand().equals("about")) {
