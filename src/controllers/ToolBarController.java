@@ -27,6 +27,7 @@ public class ToolBarController implements ActionListener {
 		appView.setToolbarView(this.toolbarView);
 		this.toolbarView.addActionListeners(this);
 		toolbarView.newRow.addActionListener(this);
+		appView.getMenuView().setActionListeners(this);
 	}
 
 	@SuppressWarnings("null")
@@ -58,32 +59,9 @@ public class ToolBarController implements ActionListener {
 					appModel.getGeneralTableModel().setCurrentSelectedRow(table.getSelectedRow() + 1);
 				}
 			}
-		} else
+		} else {
 			appView.getToolbarView().disableEnableRowButtons(false);
-
-		if (e.getActionCommand().equals("new")) {
-			appView.getPnlInputFields().removeAll();
-			appView.getPnlInputFields().revalidate();
-			appView.getPnlInputFields().repaint();
 		}
 
-		if (e.getActionCommand().equals("edit")) {
-			if (table.getSelectedRow() < table.getRowCount()) {
-				appModel.setApplicationState(new EditingState());
-				appView.getStatusBarView().updateState(appModel.getApplicationState().toString());
-			}
-		}
-		if (e.getActionCommand().equals("accept")) {
-			if (table.getSelectedRow() < table.getRowCount()) {
-				appModel.setApplicationState(new WorkingState());
-				appView.getStatusBarView().updateState(appModel.getApplicationState().toString());
-			}
-		}
-		if (e.getActionCommand().equals("cancel")) {
-			if (table.getSelectedRow() < table.getRowCount()) {
-				appModel.setApplicationState(new WorkingState());
-				appView.getStatusBarView().updateState(appModel.getApplicationState().toString());
-			}
-		}
 	}
 }

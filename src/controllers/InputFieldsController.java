@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 
+import enums.RowCRUD;
 import helpers.EnableDisableComponents;
 import models.AppModel;
 import models.ColumnModel;
@@ -46,22 +47,25 @@ public class InputFieldsController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("edit")) {
+		if (e.getActionCommand().equals("edit")  && appModel.getRowState() == RowCRUD.READ) {
+			System.out.println("edit");
+			appModel.setRowState(RowCRUD.UPDATE);
 			this.inputFieldsView.getInputHeaderView().getBtnCancel().setEnabled(true);
 			this.inputFieldsView.getInputHeaderView().getBtnAccept().setEnabled(true);
 			EnableDisableComponents.setPanelEnabled(inputFieldsView.getPnlFields(), true);
 			appModel.setApplicationState(new EditingState());
 			appView.getStatusBarView().updateState(appModel.getApplicationState().toString());
 		}
-		if (e.getActionCommand().equals("cancel")) {
+		if (e.getActionCommand().equals("cancel")  && appModel.getRowState() == RowCRUD.UPDATE) {
+			appModel.setRowState(RowCRUD.READ);
 			this.pnlInputFields.removeAll();
 			this.pnlInputFields.repaint();
 			appModel.setApplicationState(new WorkingState());
 			appView.getStatusBarView().updateState(appModel.getApplicationState().toString());
 		}
-		if (e.getActionCommand().equals("accept")) {
+		if (e.getActionCommand().equals("accept") && appModel.getRowState() == RowCRUD.UPDATE) {
 			boolean valuesCorrect = true;
-
+			appModel.setRowState(RowCRUD.READ);
 			for (FieldView fw : inputFieldsView.getFields()) {
 				if (!fw.checkInputFields(appModel.getGeneralTableModel().getColumnDataLength()))
 					valuesCorrect = false;
@@ -84,13 +88,13 @@ public class InputFieldsController implements ActionListener {
 				boolean success = appModel.getGeneralTableModel().update(columnsUpdate, appModel.getUser());
 
 				if (success) {
-					JOptionPane.showMessageDialog(appView.getFrApp(), "Row was updated.", "Update row", JOptionPane.INFORMATION_MESSAGE);
 					inputFieldsView.close();
 					appModel.setApplicationState(new WorkingState());
 					appView.getStatusBarView().updateState(appModel.getApplicationState().toString());
 					appView.getGeneralTableView().getTable().setRowSelectionInterval(
 							appModel.getGeneralTableModel().getCurrentSelectedRow() - 1,
 							appModel.getGeneralTableModel().getCurrentSelectedRow() - 1);
+					JOptionPane.showMessageDialog(appView.getFrApp(), "Row was updated.", "Update row", JOptionPane.INFORMATION_MESSAGE);
 				} else
 					JOptionPane.showMessageDialog(appView.getFrApp(), "Row was not updated.", "Error", JOptionPane.ERROR_MESSAGE);
 			} else {

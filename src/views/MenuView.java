@@ -10,7 +10,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import controllers.GeneralTableController;
+import controllers.InputFieldsController;
 import controllers.MenuController;
+import controllers.ToolBarController;
 
 public class MenuView extends JMenuBar {
 	private static final long serialVersionUID = 1L;
@@ -36,16 +39,16 @@ public class MenuView extends JMenuBar {
 
 		mniSwitchXML = new JMenuItem("Switch XML");
 		mniExit = new JMenuItem("Exit");
-		mniFirst = new JMenuItem("First");
-		mniNext = new JMenuItem("Next");
+		mniFirst = new JMenuItem("first row");
+		mniNext = new JMenuItem("next");
 		mniPrevious = new JMenuItem("Previous");
 		mniLast = new JMenuItem("Last");
-		mniNew = new JMenuItem("New");
-		mniEdit = new JMenuItem("Edit");
-		mniDelete = new JMenuItem("Delete");
-		mniAccept = new JMenuItem("Accept");
-		mniCancel = new JMenuItem("Cancel");
-		mniReport = new JMenuItem("Report");
+		mniNew = new JMenuItem("new");
+		mniEdit = new JMenuItem("edit");
+		mniDelete = new JMenuItem("delete");
+		mniAccept = new JMenuItem("accept");
+		mniCancel = new JMenuItem("cancel");
+		mniReport = new JMenuItem("report");
 		mniAbout = new JMenuItem("About");
 		
 		mniSwitchXML.setAccelerator(KeyStroke.getKeyStroke('G', Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
@@ -106,17 +109,26 @@ public class MenuView extends JMenuBar {
 	public void setActionListeners(MenuController menuController) {
 		mniSwitchXML.addActionListener(menuController);
 		mniExit.addActionListener(menuController);
-		mniFirst.addActionListener(menuController);
-		mniNext.addActionListener(menuController);
-		mniPrevious.addActionListener(menuController);
-		mniLast.addActionListener(menuController);
-		mniNew.addActionListener(menuController);
-		mniEdit.addActionListener(menuController);
-		mniDelete.addActionListener(menuController);
-		mniAccept.addActionListener(menuController);
-		mniCancel.addActionListener(menuController);
-		mniReport.addActionListener(menuController);
-		mniAbout.addActionListener(menuController);
 	}
+	
+	public void setActionListeners(ToolBarController toolBarController) {
+		mniFirst.addActionListener(toolBarController);
+		mniPrevious.addActionListener(toolBarController);
+		mniNext.addActionListener(toolBarController);
+		mniLast.addActionListener(toolBarController);
+		mniReport.addActionListener(toolBarController);
+	}
+	
+	public void setActionListeners(InputFieldsController inputFieldsController) {
+		mniEdit.addActionListener(inputFieldsController);
+		mniAccept.addActionListener(inputFieldsController);
+		mniCancel.addActionListener(inputFieldsController);
+	}
+	
+	public void setActionListener(GeneralTableController generalTableController) {
+		mniNew.addActionListener(generalTableController);
+		mniDelete.addActionListener(generalTableController);
+	}
+	
 
 }

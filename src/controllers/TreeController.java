@@ -45,6 +45,7 @@ public class TreeController implements TreeSelectionListener {
 	}
 	
 	public void revalidateUI() {
+		new ToolBarController(this.appModel, this.appView);
 		appView.getPnlTable().removeAll();
 		appView.getPnlTable().revalidate();
 		appView.getPnlTable().repaint();
@@ -55,6 +56,8 @@ public class TreeController implements TreeSelectionListener {
 		appView.getToolbarView().deleteRow.setEnabled(false);
 		appView.getToolbarView().newRow.setEnabled(true);
 		appView.getToolbarView().report.setEnabled(true);
+		appView.getToolbarView().accept.setEnabled(true);
+		appView.getToolbarView().cancel.setEnabled(true);
 	}
 
 }

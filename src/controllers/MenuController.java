@@ -75,26 +75,6 @@ public class MenuController implements ActionListener {
 			JOptionPane.showMessageDialog(frame,
 					"Created by:\nAleksandar Radic\nAleksandar Skoco\nStefan Vujic\nSvjetlana Pejicic\nBoris Stanar\nJovan Djurdjic");
 		}
-
-		if (e.getActionCommand().equals("first")) {
-			table.setRowSelectionInterval(0, 0);
-
-		}
-
-		if (e.getActionCommand().equals("last")) {
-			table.setRowSelectionInterval(table.getRowCount() - 1, table.getRowCount() - 1);
-		}
-
-		if (e.getActionCommand().equals("previous")) {
-			if (table.getSelectedRow() > 0)
-				table.setRowSelectionInterval(table.getSelectedRow() - 1, table.getSelectedRow() - 1);
-		}
-
-		if (e.getActionCommand().equals("next")) {
-			if (table.getSelectedRow() < table.getRowCount())
-				table.setRowSelectionInterval(table.getSelectedRow() + 1, table.getSelectedRow() + 1);
-		}
-
 	}
 
 }

@@ -19,7 +19,8 @@ import models.AppModel;
 
 public class StatusBarView {
 
-	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	//private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	private LocalDateTime now = LocalDateTime.now();
 	private Font fntLabel = new Font("Courier", Font.BOLD, 11);
 	private JPanel pnlStatusBar;
@@ -35,7 +36,7 @@ public class StatusBarView {
 		pnlStatusBar.setLayout(new BoxLayout(pnlStatusBar, BoxLayout.X_AXIS));
 
 		lblState.setText("State: "+ appModel.getApplicationState().toString());
-		lblCurrentTable = new JLabel("Currently selected table: 'none'");
+		lblCurrentTable = new JLabel("Currently selected table: none");
 		lblCurrentRow = new JLabel("Currently selected row: 00/nn");
 		lblDateTime = new JLabel("Date: " + dtf.format(now));
 

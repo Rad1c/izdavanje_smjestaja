@@ -20,7 +20,6 @@ public class AppController implements MouseListener {
 		appView.setUsername(appModel.getUser().getUsername());
 		appView.setActionListener(this);
 		new MenuController(this.appModel, this.appView);
-		new ToolBarController(this.appModel, this.appView);
 		new TreeController(appModel, appView);
 		new StatusBarController(appModel, appView);
 

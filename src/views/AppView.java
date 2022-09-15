@@ -7,6 +7,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import controllers.AppController;
+import database.DBConnection;
 
 public class AppView {
 	Font font1 = new Font("Tahoma", Font.BOLD, 13);
@@ -100,7 +104,19 @@ public class AppView {
 		frApp.setMinimumSize(new Dimension(ScrWidth, (int) (ScrHeight * 0.95)));
 		frApp.setVisible(true);
 		frApp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		frApp.addWindowListener(new WindowAdapter()
+		{
+		    @Override
+		    public void windowClosing(WindowEvent e)
+		    {
+		        super.windowClosing(e);
+		        DBConnection.closeConnection();
+		    }
+		});
 	}
+	
+	
 
 	public void setTableName(String tableName) {
 		this.lblTableName.setHorizontalAlignment(SwingConstants.CENTER);

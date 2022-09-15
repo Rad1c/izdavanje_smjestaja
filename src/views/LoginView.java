@@ -81,10 +81,6 @@ public class LoginView {
 	}
 
 	public void emptyUserPasswShowMsg() {
-		if (txtUsername.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Please enter a valid username", "Error!", JOptionPane.OK_OPTION);
-			return;
-		}
 
 		if (passwordField.getPassword().length == 0) {
 			JOptionPane.showMessageDialog(null, "The Password field is required", "Error!", JOptionPane.OK_OPTION);

@@ -6,10 +6,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import enums.RowCRUD;
 import models.AppModel;
 import models.ColumnModel;
 import views.AppView;
@@ -29,7 +31,7 @@ public class GeneralTableController implements ListSelectionListener, ActionList
 
 		this.generalTableView = new GeneralTableView(appView.getPnlTable(), appModel.getGeneralTableModel(), this);
 		this.generalTableView.addListener(this);
-		
+		appView.getToolbarView().setActionListener(this);
 		appView.setGeneralTableView(this.generalTableView);
 	}
 
@@ -38,19 +40,32 @@ public class GeneralTableController implements ListSelectionListener, ActionList
 		model = generalTableView.getModel();
 		if (e.getValueIsAdjusting())
 			return;
-		
+
+		if (appModel.getRowState() != RowCRUD.READ) {
+			int dlgRes = JOptionPane.showConfirmDialog(appView.getFrApp(), "Data you have entered may not be saved.",
+					"Message", JOptionPane.YES_NO_CANCEL_OPTION);
+			if (dlgRes != JOptionPane.YES_OPTION) {
+				System.out.println("izlazim");
+				return;
+			}
+		}
+		appModel.setRowState(RowCRUD.READ);
+
 		if (!model.isSelectionEmpty()) {
 			int rowNo = model.getMinSelectionIndex() + 1;
 			appModel.getGeneralTableModel().setCurrentSelectedRow(rowNo);
 			appView.getPnlInputFields().removeAll();
 			appView.getPnlInputFields().repaint();
-			appView.getToolbarView().disableEnableRowButtons(true);
-			appView.getToolbarView().editRow.setEnabled(true);
-			appView.getToolbarView().deleteRow.setEnabled(true);
-			appView.getToolbarView().deleteRow.addActionListener(this);
+			appView.getToolbarView().enableAllButtons();
+			/*
+			 * appView.getToolbarView().editRow.setEnabled(true);
+			 * appView.getToolbarView().deleteRow.setEnabled(true);
+			 * appView.getToolbarView().deleteRow.addActionListener(this);
+			 */
 			appModel.getGeneralTableModel().register(generalTableView);
 			appView.getStatusBarView().updateSelectedRow(rowNo, generalTableView.getTable().getRowCount());
 			inputFieldsController = new InputFieldsController(appModel, appView, generalTableView);
+
 		}
 	}
 
@@ -72,12 +87,12 @@ public class GeneralTableController implements ListSelectionListener, ActionList
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getActionCommand().equals("delete")) {
-			System.out.println("delte usao");
-			int dlgRes = JOptionPane.showConfirmDialog(appView.getFrApp(), "Are you sure?", "Delete row", JOptionPane.YES_NO_CANCEL_OPTION);
-			
+		if (e.getActionCommand().equals("delete") && appModel.getRowState() == RowCRUD.READ) {
+			appModel.setRowState(RowCRUD.DELETE);
+			int dlgRes = JOptionPane.showConfirmDialog(appView.getFrApp(), "Are you sure?", "Delete row",
+					JOptionPane.YES_NO_CANCEL_OPTION);
+
 			if (dlgRes == JOptionPane.YES_OPTION) {
-				dlgRes = -999;
 				if (appModel.getGeneralTableModel() == null)
 					return;
 
@@ -88,19 +103,24 @@ public class GeneralTableController implements ListSelectionListener, ActionList
 
 					if (success) {
 						inputFieldsController.inputFieldsView.close();
-						JOptionPane.showMessageDialog(appView.getFrApp(), "Row was deleted.", "Message", JOptionPane.INFORMATION_MESSAGE);
-						return;
-						
+						JTable table = appView.getGeneralTableView().getTable();
+						table.setRowSelectionInterval(table.getRowCount() - 1, table.getRowCount() - 1);
+						appModel.getGeneralTableModel().setCurrentSelectedRow(table.getRowCount() - 1);
+						JOptionPane.showMessageDialog(appView.getFrApp(), "Row was deleted.", "Message",
+								JOptionPane.INFORMATION_MESSAGE);
+
 					} else {
-						JOptionPane.showMessageDialog(appView.getFrApp(), "Row was not deleted.", "Error", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(appView.getFrApp(), "Row was not deleted.", "Error",
+								JOptionPane.ERROR_MESSAGE);
 					}
 				} catch (HeadlessException e1) {
 					System.out.println("delete failed");
-					JOptionPane.showMessageDialog(appView.getFrApp(), "Row was not deleted.", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(appView.getFrApp(), "Row was not deleted.", "Error",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
-			return;
+			appModel.setRowState(RowCRUD.READ);
 		}
-		
+
 	}
 }

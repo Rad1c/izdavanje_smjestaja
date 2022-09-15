@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 
+import controllers.GeneralTableController;
 import controllers.InputFieldsController;
 import controllers.ToolBarController;
 
@@ -131,12 +132,8 @@ public class ToolBarView {
 	public void addActionListeners(ToolBarController toolBarController) {
 		firstRow.addActionListener(toolBarController);
 		previousRow.addActionListener(toolBarController);
-		nextRow.addActionListener(toolBarController);
 		lastRow.addActionListener(toolBarController);
-		newRow.addActionListener(toolBarController);
-		//deleteRow.addActionListener(toolBarController);
-		accept.addActionListener(toolBarController);
-		cancel.addActionListener(toolBarController);
+		nextRow.addActionListener(toolBarController);
 		report.addActionListener(toolBarController);
 	}
 	
@@ -144,6 +141,11 @@ public class ToolBarView {
 		editRow.addActionListener(inputFieldsController);
 		accept.addActionListener(inputFieldsController);
 		cancel.addActionListener(inputFieldsController);
+	}
+	
+	public void setActionListener(GeneralTableController generalTableController) {
+		newRow.addActionListener(generalTableController);
+		deleteRow.addActionListener(generalTableController);
 	}
 	
 	public void disableEnableAllButtons(boolean value)

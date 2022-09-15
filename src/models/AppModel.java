@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import database.DBConnection;
+import enums.RowCRUD;
 import state.ApplicationState;
 import state.IdleState;
 import user.User;
@@ -19,6 +20,7 @@ public class AppModel {
 	GeneralTableModel generalTableModel;
 	public ApplicationState applicationState;
 	boolean tableOpened = false;
+	RowCRUD rowState = RowCRUD.READ;
 
 	public User getUser() {
 		return user;
@@ -31,16 +33,6 @@ public class AppModel {
 	public AppModel(User user) {
 		this.user = user;
 		setApplicationState(new IdleState());
-	}
-
-	public String getDateTime() {
-		LocalDateTime myDateObj = LocalDateTime.now();
-		System.out.println("Before formatting: " + myDateObj);
-		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-
-		String formattedDate = myDateObj.format(myFormatObj);
-
-		return formattedDate;
 	}
 
 	public ArrayList<String> getTablesForTableBrowser() {
@@ -98,6 +90,14 @@ public class AppModel {
 	public void setApplicationState(ApplicationState applicationState) {
 		this.applicationState = applicationState;
 		
+	}
+
+	public RowCRUD getRowState() {
+		return rowState;
+	}
+
+	public void setRowState(RowCRUD rowState) {
+		this.rowState = rowState;
 	}
 
 }

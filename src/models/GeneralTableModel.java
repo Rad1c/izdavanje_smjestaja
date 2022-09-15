@@ -298,8 +298,6 @@ public class GeneralTableModel implements Subject {
 		if (!observers.contains(newObserver)) {
 			observers.add(newObserver);
 			System.out.println("observer registred");
-		} else {
-			System.out.println("Observer already exists");
 		}
 	}
 
@@ -308,7 +306,6 @@ public class GeneralTableModel implements Subject {
 		if (observers.contains(deleteObserver)) {
 			int observerIndex = observers.indexOf(deleteObserver);
 			observers.remove(observerIndex);
-			System.out.println("observer unregistred");
 		}
 
 	}

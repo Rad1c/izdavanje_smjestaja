@@ -5,6 +5,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.prefs.Preferences;
+import java.util.regex.Pattern;
+
+import javax.swing.JOptionPane;
 
 import database.DBConnection;
 import user.User;
@@ -37,6 +40,10 @@ public class LoginModel {
 	public boolean chechLoginData(String username, String password) {
 		boolean login = false;
 		Connection db = DBConnection.getConnection();
+		if(!isValid(username)) {
+			JOptionPane.showMessageDialog(null, "Please enter a valid username", "Error!", JOptionPane.OK_OPTION);
+			return false;
+		}
 		try {
 			CallableStatement procedureStatement = db.prepareCall("{ call pisg4.spLogin(?,?) }");
 			procedureStatement.setString(1, username);
@@ -54,6 +61,16 @@ public class LoginModel {
 			System.out.println("(class: LoginModel) " + e.toString());
 		}
 		return login;
+	}
+
+	public static boolean isValid(String email) {
+		String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." + "[a-zA-Z0-9_+&*-]+)*@" + "(?:[a-zA-Z0-9-]+\\.)+[a-z"
+				+ "A-Z]{2,7}$";
+
+		Pattern pat = Pattern.compile(emailRegex);
+		if (email == null)
+			return false;
+		return pat.matcher(email).matches();
 	}
 
 	public User getUser() {

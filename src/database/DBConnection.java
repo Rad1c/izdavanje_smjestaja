@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 import parsers.XMLParser;
 
 public class DBConnection {
@@ -19,6 +21,7 @@ public class DBConnection {
 				connection = DriverManager.getConnection(connString, connInfo.getUsername(), connInfo.getPassword());
 			}
 		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error with connecting to database!", "Error!", JOptionPane.ERROR_MESSAGE);
 			System.out.println("Error with connecting to database!");
 			System.out.println("(class: DBConnection) " + e.toString());
 		}
